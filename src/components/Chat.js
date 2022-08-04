@@ -35,7 +35,7 @@ const Chat = () => {
             onSnapshot(query(collection(db,`channels/${channelId}/messages`),orderBy("timestamp","asc")), (snapshot) => {
                 const data1 =snapshot.docs.map(doc => {
                     const data = doc.data()
-                    return {id:uuid() , ...data}
+                    return {id:doc.id , ...data}
                 })
                 console.log(data1)
                 setData(data1)
