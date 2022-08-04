@@ -24,16 +24,18 @@ const Home = () => {
 
 
     useEffect(() => {
-        onSnapshot(collection(db,"channels"), (snapshot) => {
+         onSnapshot(collection(db,"channels"), (snapshot) => {
             const data1 =snapshot.docs.map(doc=> {
                 const data = doc.data()
                 return {id:doc.id, ...data}
             })
+            
             console.log(data1)
             setData(data1)
         })
 
     },[])
+    
 
     function handleSignOut() {
         signOut1()

@@ -21,18 +21,15 @@ import Message from './Message';
 
 const Chat = () => {
 
-    const [data,setData] = useState(null)
-    console.log(data.map(veri => veri.id))
-/*  console.log(data.sort((a,b) => (
-     b.timestamp - a.timestamp
- ))) */
+    const [data,setData] = useState([])
+
     const channelName = useSelector(selectChannelName)
    const channelId = useSelector(selectChannelId)
         console.log(channelId)
         
         useEffect(() => {
             onSnapshot(collection(db,`channels/${channelId}/messages`), (snapshot) => {
-                const data1 =snapshot.docs.map(doc=> {
+                const data1 =snapshot.docs.map(doc => {
                     const data = doc.data()
                     return {id:uuid() , ...data}
                 })
@@ -48,6 +45,7 @@ const Chat = () => {
    const chatRef = useRef()
    const inputRef = useRef(null)
 
+   // mesaj yazıldıkça oto scroll yapıyor 
   const scrollToBottom = () => {
     chatRef.current.scrollIntoView({
       behavior: "smooth",
@@ -95,25 +93,22 @@ const Chat = () => {
         </div>
         </header>
         <main className="flex-grow overflow-y-scroll scrollbar-hide ">
-            {
-                data.map(veri => {
-                    
-                    return (
-                        <Message
-                            key={veri.id}
-                            id={veri.id}
-                            message={veri.message}
-                            timestamp={veri.timestamp}
-                            name={veri.name}
-                            email={veri.email}
-                            photoURL={veri.photoURL}
-                        />
-                    )
-                    
-                }
-                    
-                )
-            } 
+        {
+            data.map(veri => {
+                return (
+                <Message
+                    key={veri.id}
+                    id={veri.id}
+                    message={veri.message}
+                    timestamp={veri.timestamp}
+                    name={veri.name}
+                    email={veri.email}
+                    photoURL={veri.photoURL}
+              />
+              )
+            })
+        } 
+
             <div ref={chatRef} className="pb-16" />
         </main>
         

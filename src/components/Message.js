@@ -1,6 +1,5 @@
 import React from 'react'
 import moment from "moment";
-import { useState } from 'react';
 
 
 const Message = ({id,message,timestamp,name,email, photoURL}) => {
