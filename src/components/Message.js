@@ -22,6 +22,7 @@ const Message = ({id,message,timestamp,name,email, photoURL}) => {
                 }
                 </span>
             </h4>
+            <p className='text-sm text-[#dcddde] '>{message}</p>
         </div>
     </div>
   )

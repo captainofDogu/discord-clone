@@ -16,6 +16,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import uuid from 'react-uuid'
 import Message from './Message';
+import { query, orderBy, limit } from "firebase/firestore";  
 
 
 
@@ -23,12 +24,15 @@ const Chat = () => {
 
     const [data,setData] = useState([])
 
+/*     const q = query(citiesRef, orderBy("name", "desc"), limit(3));
+ */   
     const channelName = useSelector(selectChannelName)
    const channelId = useSelector(selectChannelId)
         console.log(channelId)
-        
+        // orderBy için
+        // https://javascript.plainenglish.io/nextjs-firebase-v9-part-2-read-todos-602be605aab6
         useEffect(() => {
-            onSnapshot(collection(db,`channels/${channelId}/messages`), (snapshot) => {
+            onSnapshot(query(collection(db,`channels/${channelId}/messages`),orderBy("timestamp","asc")), (snapshot) => {
                 const data1 =snapshot.docs.map(doc => {
                     const data = doc.data()
                     return {id:uuid() , ...data}
