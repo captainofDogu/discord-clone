@@ -14,7 +14,6 @@ import { serverTimestamp } from 'firebase/firestore';
 import { doc, onSnapshot } from "firebase/firestore";
 import { useEffect } from 'react';
 import { useState } from 'react';
-import uuid from 'react-uuid'
 import Message from './Message';
 import { query, orderBy, limit } from "firebase/firestore";  
 
